@@ -1,0 +1,6 @@
+#!/bin/bash
+pat=$1
+
+#find . -iname "*$pat*.mp3" | head -1 | mplayer #xargs -I item mplayer item 
+mplayer "`find . -iname "*$pat*.mp3" | head -1`"
+
