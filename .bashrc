@@ -173,3 +173,5 @@ export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
 alias ld='ls -d */'
 alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
+alias lf='ls -ptw 1 | grep -v /'
+export PATH="/home/linn/scripts/:$PATH"
