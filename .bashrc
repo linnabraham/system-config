@@ -175,3 +175,6 @@ alias ld='ls -d */'
 alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
 alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
+alias lsrtm='rtm lsd list:inbox -x false'
+alias lstrello='trello show-cards -b'
+alias play='mplayer "`find . -iname "*.mp3" | shuf -n 1`"'
