@@ -119,7 +119,7 @@ fi
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=/home/linn/.virtualenvs
 export PROJECT_HOME=/home/linn/work/virtual
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 
 export EDITOR="/usr/bin/vim"
 export TODOTXT_DEFAULT_ACTION=ls
@@ -127,13 +127,14 @@ alias t='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
 complete -F _todo t
 #alias todo-txt='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
 
-. /usr/share/undistract-me/long-running.bash
-notify_when_long_running_commands_finish_install
+#. /usr/share/undistract-me/long-running.bash
+#notify_when_long_running_commands_finish_install
 
 if [[ -n "`which luarocks 2>/dev/null`" ]]; then
     eval `luarocks path --bin`
 fi
 
+export PATH="/home/linn/.local/bin/:$PATH"
 # added by Miniconda3 installer
 export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
 
@@ -153,9 +154,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+#conda deactivate
 # to fix problem with telegram-cli
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
+#export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
 
 alias telegram-cli='telegram-cli -N'
 
@@ -178,3 +179,11 @@ export PATH="/home/linn/scripts/:$PATH"
 alias lsrtm='rtm lsd list:inbox -x false'
 alias lstrello='trello show-cards -b'
 alias play='mplayer "`find . -iname "*.mp3" | shuf -n 1`"'
+#python3 ascii.py
+#cat art
+#alias evince='atril'
+alias eog='eom'
+alias lrtm='rtm ls -x false'
+#export PATH="/home/linn/.local/bin:$PATH"
+#export PATH="/home/linn/miniconda3/bin:$PATH"
+
