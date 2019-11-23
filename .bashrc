@@ -186,4 +186,4 @@ alias eog='eom'
 alias lrtm='rtm ls -x false'
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
-
+source scripts/pass.bash-completion
