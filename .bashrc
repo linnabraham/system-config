@@ -166,9 +166,7 @@ alias telegram-cli='telegram-cli -N'
 #export LUA_PATH='/home/linn/.luarocks/share/lua/5.1/?.lua;/home/linn/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
 #export LUA_CPATH='/home/linn/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
 
-export TRELLO_USER=linnabraham
-export TRELLO_KEY=837d41e76e3bd23c1bb805f6a2902438
-export TRELLO_TOKEN=fa3fa8e463f5e651ae6c94ec1db0df49bbaae6d15a8aac4a81a593c3432cc242
+source .secrets
 export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
