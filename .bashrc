@@ -166,7 +166,7 @@ alias telegram-cli='telegram-cli -N'
 #export LUA_PATH='/home/linn/.luarocks/share/lua/5.1/?.lua;/home/linn/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
 #export LUA_CPATH='/home/linn/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
 
-source .secrets
+source ~/.secrets
 export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
@@ -194,3 +194,7 @@ alias gcal='gcalcli --nocache'
 alias cls='clear'
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+foxit() {
+    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
+}
+
