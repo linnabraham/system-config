@@ -16,7 +16,7 @@ esac
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
+HISTSIZE=100000
 #HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
@@ -176,14 +176,23 @@ alias ld='ls -d */'
 alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
 alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
-alias lsrtm='rtm lsd list:inbox -x false'
 alias lstrello='trello show-cards -b'
-alias play='mplayer "`find . -iname "*.mp3" | shuf -n 1`"'
+alias play='mpv "`find . -iname "*.mp3" | shuf -n 1`"'
 #python3 ascii.py
 #cat art
 #alias evince='atril'
 alias eog='eom'
-alias lrtm='rtm ls -x false'
+alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
+elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
+alias gpom="git push origin master"
+alias gs="git status"
+alias gc='git commit -m '
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
-source scripts/pass.bash-completion
+source ~/scripts/pass.bash-completion
+set -o vi
+alias gcal='gcalcli --nocache'
+#alias gcalw='gcal calw today'
+alias cls='clear'
+#TODO:find a better color scheme for other writable attribute coloring.
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
