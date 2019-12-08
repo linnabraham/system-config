@@ -175,7 +175,8 @@ alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn
 alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
 alias lstrello='trello show-cards -b'
-alias play='mpv "`find . -iname "*.mp3" | shuf -n 1`"'
+play(){ mpv "`find . | grep -i "$1" | shuf -n1`"
+}
 #python3 ascii.py
 #cat art
 #alias evince='atril'
@@ -195,6 +196,6 @@ alias cls='clear'
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 foxit() {
-    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
+    nohup gtk-launch FoxitReader "$@" &>/dev/null & disown
+#    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
 }
-
