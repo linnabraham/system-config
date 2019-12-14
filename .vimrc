@@ -53,6 +53,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 "let g:mkdp_auto_start = 1
 
 Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
