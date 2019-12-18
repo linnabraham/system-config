@@ -175,7 +175,7 @@ alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn
 alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
 alias lstrello='trello show-cards -b'
-play(){ mpv "`find . | grep -i "$1" | shuf -n1`"
+play(){ mpv "`find ~/music/ | grep -i "$1" | shuf -n1`" --no-audio-display
 }
 #python3 ascii.py
 #cat art
@@ -192,10 +192,64 @@ source ~/scripts/pass.bash-completion
 set -o vi
 alias gcal='gcalcli --nocache'
 #alias gcalw='gcal calw today'
-alias cls='clear'
+alias cls='clear;ls'
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 foxit() {
-    nohup gtk-launch FoxitReader "$@" &>/dev/null & disown
+[ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
+done
+    #echo "$input"
+    nohup gtk-launch FoxitReader "$input" &>/dev/null & disown
 #    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
+    #done
 }
+#alias search='find . | grep -i '
+search() {
+    find . 2>/dev/null | grep -i "$1"
+}
+ffind(){
+    if [ "$1" == "music" ]; then
+find ~/music/ | grep -i "$2";
+elif [ "$1" == "pdf" ]; then
+zotsearch "$2";
+fi
+}
+
+
+zotsearch() {
+path="/home/linn/Dropbox/research/"
+#path="/home/linn/Zotero/storage/"
+find $path 2>/dev/null | grep -i "$1"
+}
+
+zathura() {
+[ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
+done
+    nohup zathura "$1" > /dev/null 2>&1 & disown
+}
+alias lc='ls | wc -l'
+alias ping='ping -c 10 google.com'
+drive_off(){
+    # Function that unmounts and powers off a USB drive
+    # Usage example: drive_off /dev/sdc1
+    device=$(awk '{print substr($0,0,length($0)-1)}' <<< "$1")
+    udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
+}
+drive-eject(){
+    # Function that unmounts and powers off a USB drive
+    # Usage example: drive_off /dev/sdc1
+    device={$1:0:-1}
+    echo "$device"
+    #udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
+}
+
+#alias chrome-notebook='BROWSER=/usr/bin/chromium nohup jupyter-notebook >/dev/null 2>&1 &'
+chrome-notebook(){
+BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
+}
+
+jupyter-notebook(){
+nohup jupyter-notebook $1 >/dev/null 2>&1 &
+}
+alias clr='clear'
+alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
