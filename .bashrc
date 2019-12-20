@@ -192,7 +192,7 @@ source ~/scripts/pass.bash-completion
 set -o vi
 alias gcal='gcalcli --nocache'
 #alias gcalw='gcal calw today'
-alias cls='clear;ls'
+alias cls='clear'
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 foxit() {
@@ -251,5 +251,6 @@ BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
 jupyter-notebook(){
 nohup jupyter-notebook $1 >/dev/null 2>&1 &
 }
-alias clr='clear'
+alias clr='clear;ls'
 alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
+alias tasks='rtm ls list:inbox -x false | wc -l '
