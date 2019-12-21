@@ -92,6 +92,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lt='ls -lt | head'
+alias ld='ls -d */'
+alias lf='ls -ptw 1 | grep -v /'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -138,8 +140,6 @@ export PATH="/home/linn/.local/bin/:$PATH"
 # added by Miniconda3 installer
 export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
 
-
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/linn/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -158,37 +158,50 @@ unset __conda_setup
 # to fix problem with telegram-cli
 #export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
 
-alias telegram-cli='telegram-cli -N'
-
 #export LUA_PATH='/home/linn/.luarocks/share/lua/5.1/?.lua;/home/linn/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
 #export LUA_CPATH='/home/linn/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
 
-source ~/.secrets
 export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
-alias ld='ls -d */'
+
+# source bash functions from external file
+if [[ -f ~/.bashrc-scripts ]]; then
+    source ~/.bashrc-scripts
+fi
+
+# source secrets from external file
+if [[ -f ~/.secrets ]]; then
+    source ~/.secrets
+fi
+
+# enable bash completion for the pass program
+source ~/scripts/pass.bash-completion
+
+# to show ascii art in terminal
+# python3 ascii.py
+# cat art
+# alias evince='atril'
+# alias eog='eom'
+
+#export PATH="/home/linn/.local/bin:$PATH"
+#export PATH="/home/linn/miniconda3/bin:$PATH"
+#set vim key-bindings in shell
+set -o vi
+
+#TODO:find a better color scheme for other writable attribute coloring.
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
+alias telegram-cli='telegram-cli -N'
 alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
-alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
 alias lstrello='trello show-cards -b'
-#python3 ascii.py
-#cat art
-#alias evince='atril'
-alias eog='eom'
 alias gpom="git push origin master"
 alias gs="git status"
 alias gc='git commit -m '
-#export PATH="/home/linn/.local/bin:$PATH"
-#export PATH="/home/linn/miniconda3/bin:$PATH"
-source ~/scripts/pass.bash-completion
-#set vim key-bindings in shell
-set -o vi
 alias gcal='gcalcli --nocache'
 #alias gcalw='gcal calw today'
 alias cls='clear'
-#TODO:find a better color scheme for other writable attribute coloring.
-export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 alias lc='ls | wc -l'
 alias ping='ping -c 10 google.com'
 alias clr='clear;ls'
