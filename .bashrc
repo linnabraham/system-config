@@ -163,9 +163,6 @@ alias telegram-cli='telegram-cli -N'
 #export LUA_PATH='/home/linn/.luarocks/share/lua/5.1/?.lua;/home/linn/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
 #export LUA_CPATH='/home/linn/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
 
-#export LUA_PATH='/home/linn/.luarocks/share/lua/5.1/?.lua;/home/linn/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;./?.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
-#export LUA_CPATH='/home/linn/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;./?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
-
 source ~/.secrets
 export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
@@ -175,82 +172,25 @@ alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn
 alias lf='ls -ptw 1 | grep -v /'
 export PATH="/home/linn/scripts/:$PATH"
 alias lstrello='trello show-cards -b'
-play(){ mpv "`find ~/music/ | grep -i "$1" | shuf -n1`" --no-audio-display
-}
 #python3 ascii.py
 #cat art
 #alias evince='atril'
 alias eog='eom'
-alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
-elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
 alias gpom="git push origin master"
 alias gs="git status"
 alias gc='git commit -m '
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
 source ~/scripts/pass.bash-completion
+#set vim key-bindings in shell
 set -o vi
 alias gcal='gcalcli --nocache'
 #alias gcalw='gcal calw today'
 alias cls='clear'
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-foxit() {
-[ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
-done
-    #echo "$input"
-    nohup gtk-launch FoxitReader "$input" &>/dev/null & disown
-#    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
-    #done
-}
-#alias search='find . | grep -i '
-search() {
-    find . 2>/dev/null | grep -i "$1"
-}
-ffind(){
-    if [ "$1" == "music" ]; then
-find ~/music/ | grep -i "$2";
-elif [ "$1" == "pdf" ]; then
-zotsearch "$2";
-fi
-}
-
-
-zotsearch() {
-path="/home/linn/Dropbox/research/"
-#path="/home/linn/Zotero/storage/"
-find $path 2>/dev/null | grep -i "$1"
-}
-
-zathura() {
-[ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
-done
-    nohup zathura "$1" > /dev/null 2>&1 & disown
-}
 alias lc='ls | wc -l'
 alias ping='ping -c 10 google.com'
-drive_off(){
-    # Function that unmounts and powers off a USB drive
-    # Usage example: drive_off /dev/sdc1
-    device=$(awk '{print substr($0,0,length($0)-1)}' <<< "$1")
-    udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
-}
-drive-eject(){
-    # Function that unmounts and powers off a USB drive
-    # Usage example: drive_off /dev/sdc1
-    device={$1:0:-1}
-    echo "$device"
-    #udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
-}
-
-#alias chrome-notebook='BROWSER=/usr/bin/chromium nohup jupyter-notebook >/dev/null 2>&1 &'
-chrome-notebook(){
-BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
-}
-
-jupyter-notebook(){
-nohup jupyter-notebook $1 >/dev/null 2>&1 &
-}
 alias clr='clear;ls'
 alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
-alias tasks='rtm ls list:inbox -x false | wc -l '
+alias lsrtm='rtm ls list:special -x false'
