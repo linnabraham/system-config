@@ -182,6 +182,8 @@ alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
 alias lsrtm='rtm ls list:special -x false'
 alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
 elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
+alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
+
 # source bash functions from external file
 if [[ -f ~/.bashrc-scripts ]]; then
     source ~/.bashrc-scripts
@@ -208,5 +210,4 @@ set -o vi
 
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-
 
