@@ -165,6 +165,23 @@ export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
 
+alias telegram-cli='telegram-cli -N'
+alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
+export PATH="/home/linn/scripts/:$PATH"
+alias lstrello='trello show-cards -b'
+alias gpom="git push origin master"
+alias gs="git status"
+alias gc='git commit -m '
+alias gcal='gcalcli --nocache'
+#alias gcalw='gcal calw today'
+alias cls='clear'
+alias lc='ls | wc -l'
+alias ping='ping -c 10 google.com'
+alias clr='clear;ls'
+alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
+alias lsrtm='rtm ls list:special -x false'
+alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
+elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
 # source bash functions from external file
 if [[ -f ~/.bashrc-scripts ]]; then
     source ~/.bashrc-scripts
@@ -192,18 +209,4 @@ set -o vi
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
-alias telegram-cli='telegram-cli -N'
-alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
-export PATH="/home/linn/scripts/:$PATH"
-alias lstrello='trello show-cards -b'
-alias gpom="git push origin master"
-alias gs="git status"
-alias gc='git commit -m '
-alias gcal='gcalcli --nocache'
-#alias gcalw='gcal calw today'
-alias cls='clear'
-alias lc='ls | wc -l'
-alias ping='ping -c 10 google.com'
-alias clr='clear;ls'
-alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
-alias lsrtm='rtm ls list:special -x false'
+

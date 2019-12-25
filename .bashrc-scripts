@@ -33,6 +33,9 @@ BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
 ctasks(){
     \rtm ls list:"$1" -x false | wc -l
 }
+tasks(){
+    \rtm ls list:"$1" -x false
+}
 jupyter-notebook(){
 nohup jupyter-notebook $1 >/dev/null 2>&1 &
 }
@@ -59,4 +62,15 @@ path="/home/linn/Dropbox/research/"
 find $path 2>/dev/null | grep -i "$1"
 }
 play(){ mpv "`find ~/music/ | grep -i "$1" | shuf -n1`" --no-audio-display
+}
+
+sticker(){
+fname="`echo "$1" | cut -d'.' -f 1`".jpg
+
+#fname="`dirname "$1"`/$RANDOM.jpg"
+dwebp convert "$1" -o "$fname"
+#feh "$1"
+#echo "${"$1":0:3}"
+#feh "`echo "$1" | cut -d'.' -f 1`".jpg
+feh "$fname"
 }
