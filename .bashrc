@@ -183,6 +183,7 @@ alias lsrtm='rtm ls list:special -x false'
 alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
 elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
 alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
+export LESS=-R\ $LESS
 
 # source bash functions from external file
 if [[ -f ~/.bashrc-scripts ]]; then
