@@ -91,9 +91,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lt='ls -lt | head'
-alias ld='ls -d */'
-alias lf='ls -ptw 1 | grep -v /'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -165,8 +162,7 @@ export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
 
-alias telegram-cli='telegram-cli -N'
-alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
+#alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
 export PATH="/home/linn/scripts/:$PATH"
 alias lstrello='trello show-cards -b'
 alias gpom="git push origin master"
@@ -174,15 +170,8 @@ alias gs="git status"
 alias gc='git commit -m '
 alias gcal='gcalcli --nocache'
 #alias gcalw='gcal calw today'
-alias cls='clear'
-alias lc='ls | wc -l'
-alias ping='ping -c 10 google.com'
-alias clr='clear;ls'
 alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
 alias lsrtm='rtm ls list:special -x false'
-alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
-elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
-alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
 export LESS=-R\ $LESS
 
 # source bash functions from external file
@@ -196,7 +185,9 @@ if [[ -f ~/.secrets ]]; then
 fi
 
 # enable bash completion for the pass program
-source ~/scripts/pass.bash-completion
+if [[ -f ~/.scripts/pass.bash-completion ]]; then
+    source ~/.scripts/pass.bash-completion
+fi
 
 # to show ascii art in terminal
 # python3 ascii.py
@@ -211,4 +202,6 @@ set -o vi
 
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+export PATH="~/apps/:$PATH"
