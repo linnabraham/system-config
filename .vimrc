@@ -120,7 +120,7 @@ syntax on
 
 
 " Formatting {
-    set nowrap                      " Do not wrap long lines
+"    set nowrap                      " Do not wrap long lines
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
 "    set expandtab                   " Tabs are spaces, not tabs
@@ -164,4 +164,7 @@ augroup encrypted
   " after the file has been written.
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
+
+"set clipboard=unnamedplus "requires +clipboard 
+set mouse-=a  "disable automatic visual mode on mouse select
 " }
