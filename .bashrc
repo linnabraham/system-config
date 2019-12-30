@@ -185,8 +185,8 @@ if [[ -f ~/.secrets ]]; then
 fi
 
 # enable bash completion for the pass program
-if [[ -f ~/.scripts/pass.bash-completion ]]; then
-    source ~/.scripts/pass.bash-completion
+if [[ -f ~/.config/pass.bash-completion ]]; then
+    source ~/.config/pass.bash-completion
 fi
 
 # to show ascii art in terminal
