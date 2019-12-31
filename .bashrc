@@ -164,14 +164,6 @@ export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
 
 #alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
 export PATH="/home/linn/scripts/:$PATH"
-alias lstrello='trello show-cards -b'
-alias gpom="git push origin master"
-alias gs="git status"
-alias gc='git commit -m '
-alias gcal='gcalcli --nocache'
-#alias gcalw='gcal calw today'
-alias wavemon="watch -n1 ' sudo iwconfig wlo1 | grep -i quality'"
-alias lsrtm='rtm ls list:special -x false'
 export LESS=-R\ $LESS
 
 # source bash functions from external file
@@ -205,3 +197,6 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 export PATH="~/apps/:$PATH"
+export PATH="~/.local/bin/:$PATH"
+source ~/py37-min/bin/activate
+export TERM=xterm
