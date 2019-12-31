@@ -170,4 +170,6 @@ set mouse-=a  "disable automatic visual mode on mouse select
 "save backup files ending with ~ to a different location
 set backupdir-=.
 set backupdir=~/tmp,/tmp
+set undodir-=.
+set undodir=~/tmp,/tmp
 " }
