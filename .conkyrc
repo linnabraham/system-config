@@ -147,6 +147,9 @@ ${color6}${voffset 4}${font GE Inspira:size=12}${alignc}${time %A} ${time %B} ${
 
 #calendar
 #${voffset 5}${color}${alignc}${execpi 80000 cal -m |sed '/\(20[0-9][0-9]\)/!s/^.*$/${offset 10}${font Courier:size=12,weight:light}${color4} &/;/\(20[0-9][0-9]\)/!s/.\{8\}$/${color3}&/;s/${color3} '"`date +%_d`"' /${color1} '"`date +%_d`"'${color3} /;/color1/!s/ '"`date +%_d`"'$c/${color1} '"`date +%_d`"'$c/;/color1/!s/ '"`date +%_d`"' /${color1} '"`date +%_d`"'${color2} /'}
+${execpi 300 gcalcli --nocolor --conky agenda}
+#${execpi 300 gcalcli --conky calw --monday today 2}
+#${font DejaVu Sans Mono:size=9}${execpi 300 export PYTHONIOENCODING=utf8 && gcalcli --conky --lineart=unicode calw today}
 ${color5}${font Roboto:size=10}${voffset 2}S Y S T E M   ${hr 2}${font}${color}
 ${color2}${voffset 8}Hostname:${color} ${alignr}${nodename}
 ${color2}Distro:${color}${alignr}$sysname $kernel ${alignr}${execi 6000 lsb_release -a | grep 'Release'|awk {'print $2""$3""$4""$5'}}
@@ -162,12 +165,12 @@ ${color2}${offset 30}CPU Core 1:${color} ${alignr}${offset -10}${cpu cpu1}%${ali
 ${color2}${offset 30}CPU Core 2:${color} ${alignr}${offset -10}${cpu cpu2}%${alignr}${cpubar cpu2}
 ${color2}${offset 30}CPU Core 3:${color} ${alignr}${offset -10}${cpu cpu3}%${alignr}${cpubar cpu3}
 ${color2}${offset 30}CPU Core 4:${color} ${alignr}${offset -10}${cpu cpu4}%${alignr}${cpubar cpu4}
-${color2}Top Processes${goto 222}cpu%${goto 274}mem%${color}
-${voffset 4}     1  -  ${top name 1}${alignr}${goto 170} ${goto 222}${top cpu 1} ${goto 274}${top mem 1}
-     2  -  ${top name 2}${alignr} ${goto 222}${top cpu 2} ${goto 274}${top mem 2}
-     3  -  ${top name 3}${alignr} ${goto 222}${top cpu 3} ${goto 274}${top mem 3}
-     4  -  ${top name 4}${alignr} ${goto 222}${top cpu 4} ${goto 274}${top mem 4}
-     5  -  ${top name 5}${alignr} ${goto 222}${top cpu 5} ${goto 274}${top mem 5}
+#${color2}Top Processes${goto 222}cpu%${goto 274}mem%${color}
+#${voffset 4}     1  -  ${top name 1}${alignr}${goto 170} ${goto 222}${top cpu 1} ${goto 274}${top mem 1}
+#     2  -  ${top name 2}${alignr} ${goto 222}${top cpu 2} ${goto 274}${top mem 2}
+#     3  -  ${top name 3}${alignr} ${goto 222}${top cpu 3} ${goto 274}${top mem 3}
+#     4  -  ${top name 4}${alignr} ${goto 222}${top cpu 4} ${goto 274}${top mem 4}
+#     5  -  ${top name 5}${alignr} ${goto 222}${top cpu 5} ${goto 274}${top mem 5}
 #battery
 #${color5}${font Roboto:size=10}B A T T E R Y ${hr 2}${font}${color}
 ${offset 0}${color2}Battery:${color}${alignr}${offset -10}${battery_percent BAT0}%${alignr}${battery_bar BAT0}
