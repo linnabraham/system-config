@@ -71,8 +71,8 @@ conky.config = {
 	gap_x = 15,									-- pixels between right or left border
 	gap_y = 0,									-- pixels between bottom or left border
 	minimum_height = 600,						-- minimum height of window
-	minimum_width = 300,						-- minimum height of window
-	maximum_width = 300,						-- maximum height of window
+	minimum_width = 290,						-- minimum height of window
+	maximum_width = 290,						-- maximum height of window
 
 	--Graphical
 
@@ -147,16 +147,17 @@ ${color6}${voffset 4}${font GE Inspira:size=12}${alignc}${time %A} ${time %B} ${
 
 #calendar
 #${voffset 5}${color}${alignc}${execpi 80000 cal -m |sed '/\(20[0-9][0-9]\)/!s/^.*$/${offset 10}${font Courier:size=12,weight:light}${color4} &/;/\(20[0-9][0-9]\)/!s/.\{8\}$/${color3}&/;s/${color3} '"`date +%_d`"' /${color1} '"`date +%_d`"'${color3} /;/color1/!s/ '"`date +%_d`"'$c/${color1} '"`date +%_d`"'$c/;/color1/!s/ '"`date +%_d`"' /${color1} '"`date +%_d`"'${color2} /'}
-${execpi 300 gcalcli --nocolor --conky agenda}
+${execpi 300 /home/guest/miniconda3/bin/gcalcli --nocolor --conky agenda}
 #${execpi 300 gcalcli --conky calw --monday today 2}
 #${font DejaVu Sans Mono:size=9}${execpi 300 export PYTHONIOENCODING=utf8 && gcalcli --conky --lineart=unicode calw today}
 ${color5}${font Roboto:size=10}${voffset 2}S Y S T E M   ${hr 2}${font}${color}
 ${color2}${voffset 8}Hostname:${color} ${alignr}${nodename}
 ${color2}Distro:${color}${alignr}$sysname $kernel ${alignr}${execi 6000 lsb_release -a | grep 'Release'|awk {'print $2""$3""$4""$5'}}
-${color2}Kernel:${color}${alignr}${exec uname} ${exec uname -r}
+#${color2}Kernel:${color}${alignr}${exec uname} ${exec uname -r}
 #Nvidia: ${alignr}${execp  nvidia-smi --query-supported-clocks=gpu_name --format=csv,noheader}
 #Nvidia Driver: ${alignr}${execi 60000 nvidia-smi | grep "Driver Version"| awk {'print $3'}}
 ${color2}Uptime:${color} ${alignr}${uptime}
+${color2}IP Address: ${color} ${alignr}${addrs wlan0}
 ${color5}${font Roboto:size=10}P R O C E S S O R S  ${hr 2}${font}${color}
 ${color2}CPU Freq:${color} $alignr${freq}MHz
 ${color2}CPU Temp:${color} $alignr${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
@@ -171,11 +172,6 @@ ${color2}${offset 30}CPU Core 4:${color} ${alignr}${offset -10}${cpu cpu4}%${ali
 #     3  -  ${top name 3}${alignr} ${goto 222}${top cpu 3} ${goto 274}${top mem 3}
 #     4  -  ${top name 4}${alignr} ${goto 222}${top cpu 4} ${goto 274}${top mem 4}
 #     5  -  ${top name 5}${alignr} ${goto 222}${top cpu 5} ${goto 274}${top mem 5}
-#battery
-#${color5}${font Roboto:size=10}B A T T E R Y ${hr 2}${font}${color}
-${offset 0}${color2}Battery:${color}${alignr}${offset -10}${battery_percent BAT0}%${alignr}${battery_bar BAT0}
-#Battery Discharge: ${execi 2 awk "BEGIN {print ($(cat /sys/class/power_supply/BAT0/uevent  | grep CURRENT_NOW | cut -f 2 -d "=")*$(cat /sys/class/power_supply/BAT0/uevent  | grep VOLTAGE_NOW | cut -f 2 -d "=")/1000000000000 } W
-${offset 0}${color2}Discharge :${alignr}${color}${execi 2 awk "BEGIN {print `cat /sys/class/power_supply/BAT0/power_now`/(1000000)}"} W
 ${color5}${font Roboto:size=10}M E M O R Y   ${hr 2}${font}${color}
 ${color2}${offset 30}RAM: ${color}${alignr}${offset -10}${mem} / ${memmax}${alignr}${membar}
 ${color2}${offset 30}Swap:${color} ${alignr}${offset -10}${swap} / ${swapmax}${alignr}${swapbar}
@@ -185,26 +181,35 @@ ${voffset 4}     1  -  ${top_mem name 1}${alignr}${goto 170} ${goto 222}${top_me
      3  -  ${top_mem name 3}${alignr}${goto 170} ${goto 222}${top_mem cpu 3} ${goto 274}${top_mem mem 3}
      4  -  ${top_mem name 4}${alignr}${goto 170} ${goto 222}${top_mem cpu 4} ${goto 274}${top_mem mem 4}
      5  -  ${top_mem name 5}${alignr}${goto 170} ${goto 222}${top_mem cpu 5} ${goto 274}${top_mem mem 5}
+${color5}${color5}${font Roboto:size=10}N E T W O R K   ${hr 2}${font}${color}
+#${color2}${offset 30} Link Quality : ${color} ${alignr}${offset -10$}${execi 1 awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless}
+${color2}Signal:${goto 70}${color}${alignr}${wireless_link_qual_perc wlan0}% ${wireless_link_bar wlan0}
+#${offset 10}${color2}IP: ${alignr 10}${color}${addr wlan1}
+#${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlan1}
+#${goto 10}Total down:${alignr 10}${totaldown wlan1}
+#${goto 10}${color2}${downspeedgraph wlan1 40,220 66241C FF5A45 100 -l}
+${color2}Eth Down:${color} ${alignr}${offset -10$}${downspeed wlan0}${alignr}${downspeedgraph wlan0 8,100}
+${color2}Eth Up:${color} ${alignr}${offset -10$}${upspeed wlan0}${alignr}${upspeedgraph wlan0 8,100}
+#battery
+${color5}${font Roboto:size=10}B A T T E R Y ${hr 2}${font}${color}
+${offset 0}${color2}Battery:${color}${alignr}${offset -10}${battery_percent BAT0}%${alignr}${battery_bar BAT0}
+#Battery Discharge: ${execi 2 awk "BEGIN {print ($(cat /sys/class/power_supply/BAT0/uevent  | grep CURRENT_NOW | cut -f 2 -d "=")*$(cat /sys/class/power_supply/BAT0/uevent  | grep VOLTAGE_NOW | cut -f 2 -d "=")/1000000000000 } W
+${offset 0}${color2}Discharge :${alignr}${color}${execi 2 awk "BEGIN {print `cat /sys/class/power_supply/BAT0/power_now`/(1000000)}"} W
+${color2}Time :${color}${alignr}${battery_time}
+#${format_time $battery_time "\hh\mm"}
 ${color5}${font Roboto:size=10}D R I V E S   ${hr 2}${font}${color}
-${offset 30}${color2}Root  -  SSD:${color} ${alignr}${offset -10}${fs_used /} / ${fs_size /}${alignr}${fs_bar}
-#${offset 30}${color2}I/O Read:${color} ${alignr}${offset -10}${diskio_read /dev/nvme0n1p2}${alignr}${diskiograph_read nvme0n1p2 8,100}
-#${offset 30}${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/nvme0n1p2}${alignr}${diskiograph_write nvme0n1p2 8,100}
+#${offset 30}${color2}Root  -  SSD:${color} ${alignr}${offset -10}${fs_used /} / ${fs_size /}${alignr}${fs_bar}
+${color2}Root  -  SSD:${color} ${alignr}${offset -10}${fs_used /mnt/sdb3/} / ${fs_size /mnt/sdb3}${alignr}${fs_bar /mnt/sdb3}
+#${offset 30}${color2}I/O Read:${color} ${alignr}${offset -10}${diskio_read /dev/sda}${alignr}${diskiograph_read sda 8,100}
+#${offset 30}${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/sda}${alignr}${diskiograph_write sda 8,100}
+${color2}I/O Read:${color} ${alignr}${offset -10}${diskio_read /dev/sdb}${alignr}${diskiograph_read sdb 8,100}
+${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/sdb}${alignr}${diskiograph_write sdb 8,100}
 #${offset 30}${color2}256nvme :${color} ${alignr}${offset -10}${fs_used /home/titus/256nvme} / ${fs_size /home/titus/256nvme}${alignr}${fs_bar}
 #${offset 30}${color2}I/O Read:${color} ${alignr}${offset -10}${diskio_read /dev/nvme1n1p1}${alignr}${diskiograph_read nvme1n1p1 8,100}
 #${offset 30}${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/nvme1n1p1}${alignr}${diskiograph_write nvme1n1p1 8,100}
 #${offset 30}${color2}Storage :${color} ${alignr}${offset -10}${fs_used /home/titus/1tb} / ${fs_size /home/titus/1tb}${alignr}${fs_bar /home/titus/1tb}
 #${offset 30}${color2}I/O Read:${color} ${alignr}${offset -10}${diskio_read /dev/sda5}${alignr}${diskiograph_read sda5 8,100}
 #${offset 30}${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/sda5}${alignr}${diskiograph_write sda5 8,100}
-${color5}${color5}${font Roboto:size=10}N E T W O R K   ${hr 2}${font}${color}
-#${color2}${offset 30} Link Quality : ${color} ${alignr}${offset -10$}${execi 1 awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless}
-${offset 30}${color2}Signal:${goto 70}${color}${alignr}${wireless_link_qual_perc wlan1}% ${wireless_link_bar wlan1}
-#${offset 10}${color2}IP: ${alignr 10}${color}${addr wlan1}
-#${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlan1}
-#${goto 10}Total down:${alignr 10}${totaldown wlan1}
-#${goto 10}${color2}${downspeedgraph wlan1 40,220 66241C FF5A45 100 -l}
-${color2}${offset 30}IP Address: ${color} ${alignr}${offset -10$}${addrs wlan1}
-${color2}${offset 30}Eth Down:${color} ${alignr}${offset -10$}${downspeed wlan1}${alignr}${downspeedgraph wlan1 8,100}
-${color2}${offset 30}Eth Up:${color} ${alignr}${offset -10$}${upspeed wlan1}${alignr}${upspeedgraph wlan1 8,100}
 #${font Roboto:size=10}N V I D I A   ${hr 2}${font}
 #${font Roboto:size=10,weight:bold}${color5}${execp  nvidia-smi --query-supported-clocks=gpu_name --format=csv,noheader}${font}
 #${font StyleBats:size=20}u${font}${offset 8}${voffset -12}GPU Temp ${alignr}${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
