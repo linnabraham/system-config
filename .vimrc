@@ -52,8 +52,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " default: 0
 "let g:mkdp_auto_start = 1
 
-Plug 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled = 1
+"Plug 'plasticboy/vim-markdown'
+"let g:vim_markdown_folding_disabled = 1
 
 "if has('nvim')
 "  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -78,6 +78,11 @@ Plug 'davidhalter/jedi-vim'
 "let g:jedi#popup_select_first = 0
 "let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_enabled = 0
+Plug 'vim-pandoc/vim-pandoc'
+let g:pandoc#modules#disabled = ['folding']
+let g:pandoc#biblio#sources = "g"
+let g:pandoc#biblio#bibs = ['/home/guest/stuff/myreseach.bib']
+Plug 'kana/vim-fakeclip' "to get +clipboard functionality"
 call plug#end()
 
 " -----------------------------------------------------------------------------
