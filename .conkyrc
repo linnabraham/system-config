@@ -147,7 +147,7 @@ ${color6}${voffset 4}${font GE Inspira:size=12}${alignc}${time %A} ${time %B} ${
 
 #calendar
 #${voffset 5}${color}${alignc}${execpi 80000 cal -m |sed '/\(20[0-9][0-9]\)/!s/^.*$/${offset 10}${font Courier:size=12,weight:light}${color4} &/;/\(20[0-9][0-9]\)/!s/.\{8\}$/${color3}&/;s/${color3} '"`date +%_d`"' /${color1} '"`date +%_d`"'${color3} /;/color1/!s/ '"`date +%_d`"'$c/${color1} '"`date +%_d`"'$c/;/color1/!s/ '"`date +%_d`"' /${color1} '"`date +%_d`"'${color2} /'}
-${execpi 300 /home/guest/miniconda3/bin/gcalcli --nocolor --conky agenda}
+${execpi 300 /home/guest/snakes/bin/gcalcli --nocolor --conky agenda today 3d}
 #${execpi 300 gcalcli --conky calw --monday today 2}
 #${font DejaVu Sans Mono:size=9}${execpi 300 export PYTHONIOENCODING=utf8 && gcalcli --conky --lineart=unicode calw today}
 ${color5}${font Roboto:size=10}${voffset 2}S Y S T E M   ${hr 2}${font}${color}
@@ -181,15 +181,6 @@ ${voffset 4}     1  -  ${top_mem name 1}${alignr}${goto 170} ${goto 222}${top_me
      3  -  ${top_mem name 3}${alignr}${goto 170} ${goto 222}${top_mem cpu 3} ${goto 274}${top_mem mem 3}
      4  -  ${top_mem name 4}${alignr}${goto 170} ${goto 222}${top_mem cpu 4} ${goto 274}${top_mem mem 4}
      5  -  ${top_mem name 5}${alignr}${goto 170} ${goto 222}${top_mem cpu 5} ${goto 274}${top_mem mem 5}
-${color5}${color5}${font Roboto:size=10}N E T W O R K   ${hr 2}${font}${color}
-#${color2}${offset 30} Link Quality : ${color} ${alignr}${offset -10$}${execi 1 awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless}
-${color2}Signal:${goto 70}${color}${alignr}${wireless_link_qual_perc wlan0}% ${wireless_link_bar wlan0}
-#${offset 10}${color2}IP: ${alignr 10}${color}${addr wlan1}
-#${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlan1}
-#${goto 10}Total down:${alignr 10}${totaldown wlan1}
-#${goto 10}${color2}${downspeedgraph wlan1 40,220 66241C FF5A45 100 -l}
-${color2}Eth Down:${color} ${alignr}${offset -10$}${downspeed wlan0}${alignr}${downspeedgraph wlan0 8,100}
-${color2}Eth Up:${color} ${alignr}${offset -10$}${upspeed wlan0}${alignr}${upspeedgraph wlan0 8,100}
 #battery
 ${color5}${font Roboto:size=10}B A T T E R Y ${hr 2}${font}${color}
 ${offset 0}${color2}Battery:${color}${alignr}${offset -10}${battery_percent BAT0}%${alignr}${battery_bar BAT0}
@@ -217,4 +208,13 @@ ${color2}I/O Write:${color} ${alignr}${offset -10}${diskio_write /dev/sdb}${alig
 #${offset 30}GPU Clock ${alignr}${execi 60 nvidia-settings -q GPUCurrentClockFreqs | grep -m 1 Attribute | awk '{print $4}' | sed -e 's/\.//' | cut -d, -f1} MHz
 #${offset 30}Mem Clock ${alignr}${execi 86400 nvidia-settings -q all| grep -m 1 GPUCurrentProcessorClockFreqs | awk '{print $4}' | sed 's/.$//'} MHz
 #${offset 30}Mem Used ${alignr}${execi 60 nvidia-settings -q [gpu:0]/UsedDedicatedGPUMemory -t} / ${exec nvidia-settings -q [gpu:0]/TotalDedicatedGPUMemory -t} MiB0
+${color5}${color5}${font Roboto:size=10}N E T W O R K   ${hr 2}${font}${color}
+#${color2}${offset 30} Link Quality : ${color} ${alignr}${offset -10$}${execi 1 awk 'NR==3 {print $3 "00 %"}''' /proc/net/wireless}
+${color2}Signal:${goto 70}${color}${alignr}${wireless_link_qual_perc wlan0}% ${wireless_link_bar wlan0}
+#${offset 10}${color2}IP: ${alignr 10}${color}${addr wlan1}
+#${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlan1}
+#${goto 10}Total down:${alignr 10}${totaldown wlan1}
+#${goto 10}${color2}${downspeedgraph wlan1 40,220 66241C FF5A45 100 -l}
+${color2}Eth Down:${color} ${alignr}${offset -10$}${downspeed wlan0}${alignr}${downspeedgraph wlan0 8,100}
+${color2}Eth Up:${color} ${alignr}${offset -10$}${upspeed wlan0}${alignr}${upspeedgraph wlan0 8,100}
 ]];
