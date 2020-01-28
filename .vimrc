@@ -80,9 +80,11 @@ Plug 'davidhalter/jedi-vim'
 let g:jedi#completions_enabled = 0
 Plug 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ['folding']
-let g:pandoc#biblio#sources = "g"
-let g:pandoc#biblio#bibs = ['/home/guest/stuff/myreseach.bib']
+"let g:pandoc#biblio#sources = "g"
+"let g:pandoc#biblio#bibs = ['/home/guest/stuff/myreseach.bib']
+let g:pandoc#spell#enabled = 0
 Plug 'kana/vim-fakeclip' "to get +clipboard functionality"
+Plug 'lervag/vimtex'
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -170,11 +172,25 @@ augroup encrypted
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
 
-"set clipboard=unnamedplus "requires +clipboard 
+set clipboard=unnamedplus "requires +clipboard 
 set mouse-=a  "disable automatic visual mode on mouse select
 "save backup files ending with ~ to a different location
 set backupdir-=.
 set backupdir=~/tmp,/tmp
 set undodir-=.
 set undodir=~/tmp,/tmp
+
+"function to change case of visual block
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
 " }
