@@ -1,25 +1,28 @@
-
-alias lt='ls -lt | head'
+alias lt='ls -t | head'
+alias llt='ls -lt | head'
 alias ld='ls -d */'
 alias lf='ls -ptw 1 | grep -v /'
-alias telegram-cli='telegram-cli -N'
-alias cls='clear'
 alias lc='ls | wc -l'
-alias ping='ping -c 10 google.com'
+alias cls='clear'
 alias clr='clear;ls'
-alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
+alias df='df -hT -x squashfs'
+alias pg='ps aux | grep'
+alias sudox="sudo chmod u+x"
+alias pingg='ping -c 10 google.com'
+alias wget='wget -c -U "mozilla"'
+alias mpv='mpv --shuffle --no-audio-display'
+alias mplayer='mpv'
 alias word='sdcv'
-
-alias gpom="git push origin master"
-alias gs="git status"
-alias gc='git commit -m '
-#alias lstrello='trello show-cards -b'
-
-alias rtm='f(){ if [ "$1" == "ls" -a "$2" == "" ] ; then rtm  "$1" list:inbox AND NOT tag:personal -x false;\
-elif [ "$1" == "ls" ] ; then rtm  "$1" list:"$2"  -x false  ;\
-elif [ "$1" == "planner" ] ; then rtm "$1" list:inbox ; else rtm "$@" ; fi; unset -f f; }; f'
-#alias lsrtm='rtm ls list:special -x false'
-alias ytdl='youtube-dl -cit -f 18'
+alias sc='sc-im'
+alias ytdl='youtube-dl --no-playlist -cit -f 18'
+alias ytdl-music='youtube-dl --extract-audio --audio-format mp3'
 alias gcal='gcalcli' #'gcalcli --nocache'
 alias calw='gcal calw --monday today'
-alias link="watch -n1 '/sbin/iwconfig wlan1 | grep -i quality'"
+alias telegram-cli='telegram-cli -N'
+alias link="watch -n1 '/sbin/iwconfig wlan0 | grep -i quality'"
+alias lynx="lynx -accept-all-cookies"
+alias fehs='feh --start-at'
+alias chromium-browser='chromium-browser --password-store=basic %U' #--incognito
+alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
+alias gs="git status"
+alias gc='git commit -m '
