@@ -167,8 +167,8 @@ export PATH="/home/linn/scripts/:$PATH"
 export LESS=-R\ $LESS
 
 # source bash functions from external file
-if [[ -f ~/.bashrc-scripts ]]; then
-    source ~/.bashrc-scripts
+if [[ -f ~/.bashrc_scripts ]]; then
+    source ~/.bashrc_scripts
 fi
 
 # source secrets from external file
@@ -196,7 +196,21 @@ set -o vi
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
-export PATH="~/apps/:$PATH"
+export PATH="~/Apps/:$PATH"
+export PATH="/home/guest/Apps/foxitreader/:$PATH"
 export PATH="~/.local/bin/:$PATH"
-source ~/py37-min/bin/activate
-export TERM=xterm
+export PATH="$HOME/snakes/bin:$PATH"
+export PATH="$HOME/tf3/bin:$PATH"
+export TERM=xterm-256color
+#path for texlive
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH" 
+#/home/guest/newscript &
+#if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
+#  . /usr/share/undistract-me/long-running.bash
+#  notify_when_long_running_commands_finish_install
+#fi
+. /usr/share/undistract-me/long-running.bash
+notify_when_long_running_commands_finish_install
+alias m2doc="pandoc -o output.docx -f markdown -t docx"
+export PYTHONPATH="/$HOME/work/testbed/package"
+export PS1="\[\e[35m\]\u\[\e[m\]@\[\e[33m\]\w\[\e[m\]\\$ "
