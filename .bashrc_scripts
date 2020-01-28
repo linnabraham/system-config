@@ -1,10 +1,7 @@
 foxit() {
 [ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
-done
-    #echo "$input"
-    nohup gtk-launch FoxitReader "$input" &>/dev/null & disown
-#    nohup /opt/foxitsoftware/foxitreader/FoxitReader.sh "$@" > /dev/null 2>&1 & disown
-    #done
+    nohup gtk-launch FoxitReader "$@" > /dev/null 2>&1 & disown
+    done
 }
 
 zathura() {
@@ -13,12 +10,17 @@ done
     nohup zathura "$1" > /dev/null 2>&1 & disown
 }
 
+browse(){
+    nohup surf "$1" > /dev/null 2>&1 & disown
+}
+
 drive_off(){
     # Function that unmounts and powers off a USB drive
     # Usage example: drive_off /dev/sdc1
     device=$(awk '{print substr($0,0,length($0)-1)}' <<< "$1")
     udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
 }
+
 drive-eject(){
     # Function that unmounts and powers off a USB drive
     # Usage example: drive_off /dev/sdc1
@@ -30,51 +32,30 @@ drive-eject(){
 chrome-notebook(){
 BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
 }
+
 ctasks(){
-    \rtm ls list:"$1" -x false | wc -l
+    rtm ls list:"$1" -x false | wc -l
 }
+
 jupyter-notebook(){
-nohup jupyter-notebook $1 >/dev/null 2>&1 &
+nohup jupyter-notebook $1 >/dev/null 2>&1 & disown
 }
 
-
-#alias search='find . | grep -i '
 search() {
-    #find . 2>/dev/null | grep -i "$1"
     find . -iname "*$1*"
-}
-gsearch() {
-    find . 2>/dev/null | grep -i "$1"
-}
-ffind(){
-    if [ "$1" == "music" ]; then
-find ~/music/ | grep -i "$2";
-elif [ "$1" == "pdf" ]; then
-zotsearch "$2";
-fi
-}
-zotsearch() {
-path="/home/linn/Dropbox/research/"
-#path="/home/linn/Zotero/storage/"
-find $path 2>/dev/null | grep -i "$1"
-}
-play(){ mpv "`find ~/music/ | grep -i "$1" | shuf -n1`" --no-audio-display
+    #find . 2>/dev/null | grep -i "$1"
 }
 
 sticker(){
 fname="`echo "$1" | cut -d'.' -f 1`".jpg
-
-#fname="`dirname "$1"`/$RANDOM.jpg"
 dwebp convert "$1" -o "$fname"
-#feh "$1"
-#echo "${"$1":0:3}"
-#feh "`echo "$1" | cut -d'.' -f 1`".jpg
 feh "$fname"
 }
-tasks() {
-    if [ "$1" == "" ]; then
-	\rtm ls list:inbox AND NOT \(tag:personal OR tag:house\) -x false;
-else
-    \rtm ls list:"$1" -x false;
-    fi
+
+shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+
+unlock() {
+    filename=`echo "$1" | cut -d '.' -f 1`
+    #echo $filename
+    pdftk "$1" input_pw "$2" output $filename"_unsecured.pdf" && rm "$1"
 }
