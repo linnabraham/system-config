@@ -24,13 +24,13 @@
       "name": "important",
       "description": "Display incomplete tasks with a priority of 1",
       "command": "ls",
-      "args": "priority:1 AND status:incomplete"
+      "args": "priority:1 OR priority:2 OR priority:3 AND status:incomplete"
     },
 {
       "name": "work",
       "description": "Display tasks related to work alone",
       "command": "ls",
-      "args": "list:inbox AND NOT tag:personal"
+      "args": "(list:inbox OR list:research) AND NOT tag:personal -x false"
     },
 {
       "name": "personal",
