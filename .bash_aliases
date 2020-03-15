@@ -1,7 +1,8 @@
 alias lt='ls -t | head'
 alias llt='ls -lt | head'
+alias ls='ls -t'
 alias ld='ls -d */'
-alias lf='ls -ptw 1 | grep -v /'
+#alias lf='ls -ptw 1 | grep -v /'
 alias lc='ls | wc -l'
 alias cls='clear'
 alias clr='clear;ls'
@@ -26,3 +27,6 @@ alias chromium-browser='chromium-browser --password-store=basic %U' #--incognito
 alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
 alias gs="git status"
 alias gc='git commit -m '
+alias diary='vim "`date +%F`".md'
+alias event='gcalcli --default-calendar linna.kkpp@gmail.com quick'
+alias neomutt='TERM=xterm neomutt'
