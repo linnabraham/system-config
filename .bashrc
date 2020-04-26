@@ -121,6 +121,7 @@ export PROJECT_HOME=/home/linn/work/virtual
 #source /usr/local/bin/virtualenvwrapper.sh
 
 export EDITOR="/usr/bin/vim"
+export BROWSER=firefox
 export TODOTXT_DEFAULT_ACTION=ls
 alias t='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
 complete -F _todo t
@@ -201,8 +202,8 @@ export PATH="/home/guest/Apps/foxitreader/:$PATH"
 export PATH="~/.local/bin/:$PATH"
 export PATH="$HOME/snakes/bin:$PATH"
 export PATH="$HOME/tf3/bin:$PATH"
+export PATH="/usr/lib64/java/jre/bin/:$PATH"
 export TERM=xterm-256color
-#path for texlive
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH" 
 #/home/guest/newscript &
 #if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
