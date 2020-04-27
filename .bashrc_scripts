@@ -1,7 +1,13 @@
+# open up programs from the command line
+
 foxit() {
 [ $# -ge 1 -a -f "$1" ] && input="$1" || while read data; do input=$data
     nohup gtk-launch FoxitReader "$@" > /dev/null 2>&1 & disown
     done
+}
+
+okpdf() {
+   nohup okular "$@" > /dev/null 2>&1 & disown
 }
 
 zathura() {
@@ -14,37 +20,27 @@ browse(){
     nohup surf "$1" > /dev/null 2>&1 & disown
 }
 
-drive_off(){
-    # Function that unmounts and powers off a USB drive
-    # Usage example: drive_off /dev/sdc1
-    device=$(awk '{print substr($0,0,length($0)-1)}' <<< "$1")
-    udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
-}
-
-drive-eject(){
-    # Function that unmounts and powers off a USB drive
-    # Usage example: drive_off /dev/sdc1
-    device={$1:0:-1}
-    echo "$device"
-    #udisksctl unmount -b "$1" && udisksctl power-off -b "$device"
-}
-
 chrome-notebook(){
 BROWSER=/usr/bin/chromium nohup jupyter-notebook $1 >/dev/null 2>&1 &
-}
-
-ctasks(){
-    rtm ls list:"$1" -x false | wc -l
 }
 
 jupyter-notebook(){
 nohup jupyter-notebook $1 >/dev/null 2>&1 & disown
 }
 
-search() {
-    find . -iname "*$1*"
-    #find . 2>/dev/null | grep -i "$1"
+tm()
+{
+    nohup texmaker $1 >/dev/null 2>&1 & disown
 }
+
+# efforts at a custom manpage
+
+myhelp() {
+    HELP_DIR="$HOME/git-repos/code/"
+    grep -R "$1" $HELP_DIR
+}
+
+# function to view stickers downloaded from telegram
 
 sticker(){
 fname="`echo "$1" | cut -d'.' -f 1`".jpg
@@ -52,10 +48,34 @@ dwebp convert "$1" -o "$fname"
 feh "$fname"
 }
 
-shdl() { curl -O $(curl -s http://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+# lukes function to download scihub papers
 
-unlock() {
-    filename=`echo "$1" | cut -d '.' -f 1`
-    #echo $filename
-    pdftk "$1" input_pw "$2" output $filename"_unsecured.pdf" && rm "$1"
+shdl() { curl -O $(curl -s https://sci-hub.tw/"$@" | grep location.href | grep -o http.*pdf) ;}
+
+# conner mcdaniels function 
+
+doi2bib(){
+    #echo >> bib.bib;
+    #curl -s "http://api.crossref.org/works/$1/transform/application/x-bibtex" >> bib.bib;
+    #echo >> bib.bib
+    curl -s "http://api.crossref.org/works/$1/transform/application/x-bibtex" ;
 }
+
+doirename(){
+    # function that renames a journal paper using its title obtained from the supplied doi
+    name=`doi2bib "$1" | grep title | awk -F"[{}]" '{print $2}' | perl -pe 's/[ \(\)]/_/g;'`
+    mv "$2" $name.pdf
+}
+
+open_with_fzf() {
+    fd -t f -H -I | fzf | xargs -ro -d "\n" xdg-open 2>&-
+}
+
+cd_with_fzf() {
+    cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" )"
+}
+
+findpdf(){
+    okpdf "$(find ~ -type f -iname "*.pdf" | fzf)"
+}
+
