@@ -2,7 +2,7 @@
 auto-reload no
 urls-source "inoreader"
 inoreader-login "linn.official@gmail.com"
-inoreader-passwordeval "pass show offical/generic | tail -1"
+inoreader-passwordeval "pass show official/generic | tail -1"
 
 #external-url-viewer "urlscan"
 #external-url-viewer "urlview"
