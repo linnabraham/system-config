@@ -87,10 +87,6 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -123,7 +119,8 @@ export PROJECT_HOME=/home/linn/work/virtual
 export EDITOR="/usr/bin/vim"
 export BROWSER=firefox
 export TODOTXT_DEFAULT_ACTION=ls
-alias t='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
+alias t='/usr/bin/todo.sh -a'
+source $HOME/.config/todo_completion
 complete -F _todo t
 #alias todo-txt='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
 
@@ -185,8 +182,6 @@ fi
 # to show ascii art in terminal
 # python3 ascii.py
 # cat art
-# alias evince='atril'
-# alias eog='eom'
 
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
@@ -206,12 +201,46 @@ export PATH="/usr/lib64/java/jre/bin/:$PATH"
 export TERM=xterm-256color
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH" 
 #/home/guest/newscript &
-#if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
-#  . /usr/share/undistract-me/long-running.bash
-#  notify_when_long_running_commands_finish_install
-#fi
+if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
+  . /usr/share/undistract-me/long-running.bash
+  notify_when_long_running_commands_finish_install
+fi
 . /usr/share/undistract-me/long-running.bash
 notify_when_long_running_commands_finish_install
-alias m2doc="pandoc -o output.docx -f markdown -t docx"
+
+# git prompt
+source $HOME/.local/bin/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1 
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUPSTREAM="auto"
+export GIT_PS1_HIDE_IF_PWD_IGNORED=true
+
+# version with short working directory
+
+function shortwd() {
+    num_dirs=3
+    pwd_symbol="..."
+    newPWD="${PWD/#$HOME/~}"
+    if [ $(echo -n $newPWD | awk -F '/' '{print NF}') -gt $num_dirs ]; then
+        newPWD=$(echo -n $newPWD | awk -F '/' '{print $1 "/.../" $(NF-1) "/" $(NF)}')
+    fi 
+    echo -n $newPWD
+}
+
+export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
+
+export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git "/"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+xrdb -load /dev/null
+eval "$(thefuck --alias)"
+export PROMPT_COMMAND='history -a'
+HISTCONTROL=ignoredups:erasedups
+
 export PYTHONPATH="/$HOME/work/testbed/package"
-export PS1="\[\e[35m\]\u\[\e[m\]@\[\e[33m\]\w\[\e[m\]\\$ "
+export PYTHONPATH="/$HOME/work/testbed/train/:$PYTHONPATH"
+unset SSH_ASKPASS
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
