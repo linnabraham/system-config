@@ -1,0 +1,26 @@
+[global_config]
+  window_state = maximise
+  title_use_system_font = False
+  title_font = Monospace Bold 12.5
+[keybindings]
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    font = Monospace Bold 13.5
+    show_titlebar = False
+    use_system_font = False
+  [[cmatrix]]
+    cursor_color = "#aaaaaa"
+    font = Monospace Bold 13.5
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
