@@ -10,6 +10,7 @@
     cursor_color = "#aaaaaa"
     font = Monospace Bold 13.5
     show_titlebar = False
+    scrollback_infinite = True
     use_system_font = False
   [[cmatrix]]
     cursor_color = "#aaaaaa"

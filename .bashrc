@@ -231,7 +231,7 @@ function shortwd() {
 
 export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
 
-export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git "/"'
+export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git '
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 xrdb -load /dev/null
@@ -244,3 +244,5 @@ export PYTHONPATH="/$HOME/work/testbed/train/:$PYTHONPATH"
 unset SSH_ASKPASS
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export TDIR="$HOME/Dropbox/todo"
+complete -cf sudo

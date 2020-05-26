@@ -3,7 +3,7 @@ alias ll='/bin/ls --color=auto -lF'
 alias la='/bin/ls --color=auto -axF'
 alias ls='/bin/ls --color=auto -xFpt'
 alias l='ls'
-alias lt='ls -t | head '
+alias lt='ls | head '
 alias ld='ls -d */'
 alias lc='ls | wc -l'
 alias cls='clear'
@@ -26,7 +26,7 @@ alias lynx="lynx -accept-all-cookies"
 alias fehs='feh --start-at'
 alias chromium-browser='chromium-browser --password-store=basic %U' #--incognito
 alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
-alias gs="git status"
+alias gs="git status -uno"
 alias gc='git commit -m '
 alias diary='vim "`date +%F`".md'
 alias event='gcalcli --default-calendar linna.kkpp@gmail.com quick'
@@ -41,3 +41,6 @@ alias eog='eom'
 alias diff='diff --color'
 alias vifm='TERM=xterm vifm'
 alias nnn='TERM=xterm nnn'
+alias mem='watch -n1 ls-mem'
+alias tracktime='time cat'
+alias cleaname="perl-rename 's/[ \(\)]/_/g;'"

@@ -54,12 +54,12 @@ shdl() { curl -O $(curl -s https://sci-hub.tw/"$@" | grep location.href | grep -
 
 # conner mcdaniels function 
 
-doi2bib(){
+#doi2bib(){
     #echo >> bib.bib;
     #curl -s "http://api.crossref.org/works/$1/transform/application/x-bibtex" >> bib.bib;
     #echo >> bib.bib
-    curl -s "http://api.crossref.org/works/$1/transform/application/x-bibtex" ;
-}
+    #curl -s "http://api.crossref.org/works/$1/transform/application/x-bibtex" ;
+#}
 
 doirename(){
     # function that renames a journal paper using its title obtained from the supplied doi
@@ -72,10 +72,41 @@ open_with_fzf() {
 }
 
 cd_with_fzf() {
-    cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" )"
+    cd "$(fd -t d . '/'| fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" )"
 }
 
 findpdf(){
     okpdf "$(find ~ -type f -iname "*.pdf" | fzf)"
 }
 
+radio(){
+    mpv --no-resume-playback $AIRM
+}
+
+settime(){
+    sudo -i ntpdate pool.ntp.org && sudo -i hwclock -w --localtime
+}
+
+# function for quick note taking
+qnote(){
+path="$HOME/Dropbox/Notes/quick/$1.md"
+vim $path
+}
+
+alias qtconsole='jupyter qtconsole --style monokai'
+
+notes() {
+  if [ ! -z "$1" ]; then
+    # Using the "$@" here will take all parameters passed into
+    # this function so we can place everything into our file.
+    echo "$@" >> "$HOME/notes.md"
+  else
+    # If no arguments were passed we will take stdin and place
+    # it into our notes instead.
+    cat - >> "$HOME/notes.md"
+  fi
+}
+
+m2slides(){
+    pandoc "$1" -t beamer -o "${1%.*}.pdf" 
+}
