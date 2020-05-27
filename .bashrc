@@ -246,3 +246,4 @@ unset SSH_ASKPASS
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export TDIR="$HOME/Dropbox/todo"
 complete -cf sudo
+export MYBIB='/home/guest/mybib.bib'
