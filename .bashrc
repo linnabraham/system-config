@@ -247,3 +247,6 @@ unset SSH_ASKPASS
 export TDIR="$HOME/Dropbox/todo"
 complete -cf sudo
 export MYBIB='/home/guest/mybib.bib'
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems" 
+export PATH="$HOME/gems/bin:$PATH"
