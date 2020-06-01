@@ -6,7 +6,7 @@ foxit() {
     done
 }
 
-okpdf() {
+okular() {
    nohup okular "$@" > /dev/null 2>&1 & disown
 }
 
@@ -109,4 +109,8 @@ notes() {
 
 m2slides(){
     pandoc "$1" -t beamer -o "${1%.*}.pdf" 
+}
+
+typora() {
+   nohup typora "$@" > /dev/null 2>&1 & disown
 }
