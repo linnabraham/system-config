@@ -10,8 +10,8 @@ alias neomutt='TERM=xterm neomutt'
 alias vifm='TERM=xterm vifm'
 alias nnn='TERM=xterm nnn'
 alias wavemon="TERM=xterm wavemon"
-alias cln='clear'
-alias cls='clear;ls'
+alias cls='clear'
+alias cs='clear;ls'
 alias df='df -hT -x squashfs'
 alias pg='ps aux | grep'
 alias sudox="sudo chmod u+x"
@@ -28,7 +28,7 @@ alias link="watch -n1 '/sbin/iwconfig wlan0 | grep -i quality'"
 alias lynx="lynx -accept-all-cookies"
 alias fehs='feh --start-at'
 alias chromium-browser='chromium-browser --password-store=basic %U' #--incognito
-alias config='/usr/bin/git --git-dir=/home/guest/.myconf/ --work-tree=/home/guest/'
+alias config="/usr/bin/git --git-dir=$HOME/.myconf.git --work-tree=$HOME"
 alias gs="git status -uno"
 alias gc='git commit -m '
 alias event='gcalcli --default-calendar linna.kkpp@gmail.com quick'
@@ -51,3 +51,4 @@ alias lv='ls | less'
 alias dt='vim $(date +%Y.%m.%d.md)'
 alias docs='cat $HOME/Dropbox/drafts/details.md | ag'
 alias inoreader='newsboat -C $HOME/.config/newsboat/inoconfig'
+alias weather='curl wttr.in'
