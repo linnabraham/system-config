@@ -132,22 +132,23 @@ if [[ -n "`which luarocks 2>/dev/null`" ]]; then
 fi
 
 export PATH="/home/linn/.local/bin/:$PATH"
-# added by Miniconda3 installer
-export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
+export PATH="/home/linn/.local/bin/pandoc-2.10/bin/:$PATH"
+## added by Miniconda3 installer
+#export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/linn/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/linn/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/linn/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/linn/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/home/linn/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+    #eval "$__conda_setup"
+#else
+    #if [ -f "/home/linn/miniconda3/etc/profile.d/conda.sh" ]; then
+        #. "/home/linn/miniconda3/etc/profile.d/conda.sh"
+    #else
+        #export PATH="/home/linn/miniconda3/bin:$PATH"
+    #fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
 #conda deactivate
 # to fix problem with telegram-cli
@@ -158,7 +159,6 @@ unset __conda_setup
 
 export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
-export PATH="/home/linn/Apps/trello-cli/bin:$PATH"
 
 #alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
 export PATH="/home/linn/scripts/:$PATH"
@@ -186,27 +186,26 @@ fi
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
 #set vim key-bindings in shell
-set -o vi
+#set -o vi
 
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 export PATH="~/Apps/:$PATH"
-export PATH="/home/guest/Apps/foxitreader/:$PATH"
 export PATH="~/.local/bin/:$PATH"
-export PATH="$HOME/snakes/bin:$PATH"
-export PATH="$HOME/tf3/bin:$PATH"
+#export PATH="$HOME/snakes/bin:$PATH"
+#export PATH="$HOME/tf3/bin:$PATH"
 export PATH="/usr/lib64/java/jre/bin/:$PATH"
 export TERM=xterm-256color
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH" 
 #/home/guest/newscript &
-if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
-  . /usr/share/undistract-me/long-running.bash
-  notify_when_long_running_commands_finish_install
-fi
-. /usr/share/undistract-me/long-running.bash
-notify_when_long_running_commands_finish_install
+#if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
+#  . /usr/share/undistract-me/long-running.bash
+#  notify_when_long_running_commands_finish_install
+#fi
+#. /usr/share/undistract-me/long-running.bash
+#notify_when_long_running_commands_finish_install
 
 # git prompt
 source $HOME/.local/bin/git-prompt.sh
@@ -229,21 +228,25 @@ function shortwd() {
     echo -n $newPWD
 }
 
-export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
+#export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
 
-export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git '
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git '
+#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 xrdb -load /dev/null
-eval "$(thefuck --alias)"
+#eval "$(thefuck --alias)"
 export PROMPT_COMMAND='history -a'
 HISTCONTROL=ignoredups:erasedups
 
 export PYTHONPATH="/$HOME/work/testbed/package"
 export PYTHONPATH="/$HOME/work/testbed/train/:$PYTHONPATH"
+#export PYTHONPATH="/$HOME/tf3/lib64/python3.7/site-packages/:$PYTHONPATH"
 unset SSH_ASKPASS
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+#bindkey -s 'Alt+f' cd_with_fzf
 export TDIR="$HOME/Dropbox/todo"
 complete -cf sudo
 export MYBIB='/home/guest/mybib.bib'
