@@ -1,4 +1,6 @@
-source "gpg2 -d ~/.mutt/passwords.gpg |"
+#source "gpg2 -d ~/.mutt/passwords.gpg |"
+set my_pass="`pass show official/gmail`"
+set imap_pass=$my_pass
 set folder = "imaps://linn.official@gmail.com@imap.gmail.com:993"
 set imap_user = "linn.official@gmail"
 #set smtp_url = "smtp://linn.official@gmail.com@smtp.gmail.com:587/"
@@ -21,7 +23,7 @@ set certificate_file = "~/.mutt/certificates"
 set sort = 'reverse-date'
 #set mailcap_path = /.config/mutt/mailcap
 #auto_view text/html
-source colors.muttrc
+#source colors.muttrc
 set envelope_from=yes
 set mark_old = no		# Unread mail stay unread until read
 set markers = no		# Disables the `+` displayed at line wraps
