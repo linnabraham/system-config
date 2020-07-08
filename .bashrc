@@ -112,9 +112,11 @@ if ! shopt -oq posix; then
 fi
 
 # virtualenv and virtualenvwrapper
-export WORKON_HOME=/home/linn/.virtualenvs
-export PROJECT_HOME=/home/linn/work/virtual
+#export WORKON_HOME=/home/linn/.virtualenvs
+#export PROJECT_HOME=/home/linn/work/virtual
 #source /usr/local/bin/virtualenvwrapper.sh
+source $HOME/.local/bin/virtualenvwrapper.sh
+
 
 export EDITOR="/usr/bin/vim"
 export BROWSER=firefox
@@ -228,13 +230,14 @@ function shortwd() {
     echo -n $newPWD
 }
 
-#export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
+export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
 
-#export FZF_DEFAULT_COMMAND='fdfind .  --hidden --follow --exclude .git '
+#export FZF_DEFAULT_COMMAND='fd .  --hidden --follow --exclude .git '
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 #export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 xrdb -load /dev/null
-#eval "$(thefuck --alias)"
+eval "$(thefuck --alias f)"
 export PROMPT_COMMAND='history -a'
 HISTCONTROL=ignoredups:erasedups
 
@@ -253,3 +256,4 @@ export MYBIB='/home/guest/mybib.bib'
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems" 
 export PATH="$HOME/gems/bin:$PATH"
+
