@@ -29,6 +29,7 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
+
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
 
@@ -42,6 +43,19 @@ let g:pandoc#modules#disabled = ['folding']
 let g:pandoc#spell#enabled = 0
 Plug 'lervag/vimtex'
 Plug 'preservim/nerdcommenter'
+Plug 'bling/vim-airline'
+Plug 'chrisbra/csv.vim'
+
+" pynvim needs to be installed
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'deoplete-plugins/deoplete-jedi'
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -152,7 +166,26 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 "
 nnoremap <F5> "=strftime("%a %d %b %Y")<CR>P
 inoremap <F5> <C-R>=strftime("%a %d %b %Y")<CR>
+nnoremap <F5> :VimtexCompile<CR>
+autocmd FileType python compiler pylint
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+vnoremap <f5> :redirect(current.window.buffer) !python<CR>
+
+" Always use the same virtualenv for vim, regardless of what Python
+" environment is loaded in the shell from which vim is launched
+"let g:vim_virtualenv_path = '/home/guest/snakes'
+"if exists('g:vim_virtualenv_path')
+    "pythonx import os; import vim
+    "pythonx activate_this = os.path.join(vim.eval('g:vim_virtualenv_path'), 'bin/activate_this.py')
+    "pythonx with open(activate_this) as f: exec(f.read(), {'__file__': activate_this})
+"endif
 "
 "
 "
+
+" This is new style
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
 "}
