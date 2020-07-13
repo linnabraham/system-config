@@ -45,6 +45,12 @@ Plug 'lervag/vimtex'
 Plug 'preservim/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'chrisbra/csv.vim'
+Plug 'junegunn/limelight.vim'
+let g:limelight_conceal_ctermfg = 'gray'
+"let g:limelight_conceal_ctermfg = 240
+Plug 'junegunn/goyo.vim'
+
+
 
 " pynvim needs to be installed
 if has('nvim')
@@ -56,6 +62,7 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 Plug 'deoplete-plugins/deoplete-jedi'
+
 call plug#end()
 
 " -----------------------------------------------------------------------------
