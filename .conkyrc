@@ -144,7 +144,7 @@ conky.text = [[
 
 #calendar
 #${voffset 5}${color}${alignc}${execpi 80000 cal -m |sed '/\(20[0-9][0-9]\)/!s/^.*$/${offset 10}${font Courier:size=12,weight:light}${color4} &/;/\(20[0-9][0-9]\)/!s/.\{8\}$/${color3}&/;s/${color3} '"`date +%_d`"' /${color1} '"`date +%_d`"'${color3} /;/color1/!s/ '"`date +%_d`"'$c/${color1} '"`date +%_d`"'$c/;/color1/!s/ '"`date +%_d`"' /${color1} '"`date +%_d`"'${color2} /'}
-${execpi 10 todo.sh -p lsp | grep -vE 'TODO|--'}
+${execpi 10 todo.sh -p lsp | grep -vE 'TODO|--'| cut -d' ' --complement -f 1,3}
 ${execpi 300 gcalcli --nocolor --conky agenda | head -5}
 #${execpi 300 gcalcli --conky calw --monday today 2}
 #${font DejaVu Sans Mono:size=9}${execpi 300 export PYTHONIOENCODING=utf8 && gcalcli --conky --lineart=unicode calw today}
