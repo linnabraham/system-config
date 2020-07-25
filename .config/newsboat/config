@@ -30,7 +30,7 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article white default bold
 
-player "setsid -f nohup mpv >/dev/null 2>&1 "
+player "mpv"
 download-path "~/Downloads/podcasts/%h/%n"
 
 browser linkhandler
