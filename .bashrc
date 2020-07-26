@@ -16,7 +16,7 @@ esac
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
+HISTSIZE=1000000
 #HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
@@ -119,7 +119,7 @@ source $HOME/.local/bin/virtualenvwrapper.sh
 
 
 export EDITOR="/usr/bin/vim"
-export BROWSER=firefox
+#export BROWSER=firefox
 export TODOTXT_DEFAULT_ACTION=ls
 alias t='/usr/bin/todo.sh -a'
 source $HOME/.config/todo_completion
@@ -134,6 +134,7 @@ if [[ -n "`which luarocks 2>/dev/null`" ]]; then
 fi
 
 export PATH="/home/linn/.local/bin/:$PATH"
+#export PATH="/home/linn/.virtualenvs/pytools/bin/:$PATH"
 export PATH="/home/linn/.local/bin/pandoc-2.10/bin/:$PATH"
 ## added by Miniconda3 installer
 #export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
@@ -163,7 +164,6 @@ export SHARE_PATH=/media/linn/mycupboard/linux/quilt_packages
 export QUILT_PRIMARY_PACKAGE_DIR=$SHARE_PATH
 
 #alias config='/usr/bin/git --git-dir=/home/linn/dotfiles/ --work-tree=/home/linn'
-export PATH="/home/linn/scripts/:$PATH"
 export LESS=-R\ $LESS
 
 # source bash functions from external file
@@ -194,13 +194,9 @@ fi
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
-export PATH="~/Apps/:$PATH"
-export PATH="~/.local/bin/:$PATH"
-#export PATH="$HOME/snakes/bin:$PATH"
-#export PATH="$HOME/tf3/bin:$PATH"
 export PATH="/usr/lib64/java/jre/bin/:$PATH"
 export TERM=xterm-256color
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH" 
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 #/home/guest/newscript &
 #if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
 #  . /usr/share/undistract-me/long-running.bash
@@ -213,7 +209,7 @@ export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 source $HOME/.local/bin/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1 
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_HIDE_IF_PWD_IGNORED=true
@@ -226,7 +222,7 @@ function shortwd() {
     newPWD="${PWD/#$HOME/~}"
     if [ $(echo -n $newPWD | awk -F '/' '{print NF}') -gt $num_dirs ]; then
         newPWD=$(echo -n $newPWD | awk -F '/' '{print $1 "/.../" $(NF-1) "/" $(NF)}')
-    fi 
+    fi
     echo -n $newPWD
 }
 
@@ -241,9 +237,9 @@ eval "$(thefuck --alias f)"
 export PROMPT_COMMAND='history -a'
 HISTCONTROL=ignoredups:erasedups
 
-export PYTHONPATH="/$HOME/work/testbed/package"
-export PYTHONPATH="/$HOME/work/testbed/train/:$PYTHONPATH"
-#export PYTHONPATH="/$HOME/tf3/lib64/python3.7/site-packages/:$PYTHONPATH"
+#export PYTHONPATH="/$HOME/work/testbed/train/:$PYTHONPATH"
+#export PYTHONPATH="/$HOME/work/ztf/testbed/train/:$PYTHONPATH"
+export PYTHONPATH="$HOME/work/ztf/testbed/package:$PYTHONPATH"
 unset SSH_ASKPASS
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -254,6 +250,15 @@ export TDIR="$HOME/Dropbox/todo"
 complete -cf sudo
 export MYBIB='/home/guest/mybib.bib'
 # Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems" 
+export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+#export PATH="/home/linn/.vim/plugged/vim-live-latex-preview/bin":$PATH
 
+export XDG_CONFIG_HOME="$HOME/.config"
+#[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
+#[ ! -f "$XDG_CONFIG_HOME/shortcutrc" ] && shortcuts >/dev/null 2>&1 &
+
+[ -f $XDG_CONFIG_HOME/shortcutrc ] && source $XDG_CONFIG_HOME/shortcutrc
+export TERMINAL=/usr/local/bin/st
+#workon tf
+source /etc/profile.d/undistract-me.sh

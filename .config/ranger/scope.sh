@@ -108,6 +108,13 @@ handle_extension() {
             jq --color-output . "${FILE_PATH}" && exit 5
             python -m json.tool -- "${FILE_PATH}" && exit 5
             ;;
+	## Jupyter Notebook
+	ipynb)
+	    jupyter nbconvert "${FILE_PATH}" --output=/tmp/notebook.html
+	    w3m -dump /tmp/notebook.html && exit 5
+	    lynx -dump -- /tmp/notebook.html && exit 5
+	    elinks -dump /tmp/notebook.html && exit 5
+	    ;;
 
         ## Direct Stream Digital/Transfer (DSDIFF) and wavpack aren't detected
         ## by file(1).
@@ -154,10 +161,10 @@ handle_image() {
 	    exit 7;;
 
         ## Video
-        # video/*)
-        #     # Thumbnail
-        #     ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-        #     exit 1;;
+	 video/*)
+	     # Thumbnail
+	     ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+	     exit 1;;
 
 	# PDF
 	 application/pdf)
