@@ -6,7 +6,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 
-" vim-bootstrap 
+" vim-bootstrap
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -49,9 +49,7 @@ Plug 'junegunn/limelight.vim'
 let g:limelight_conceal_ctermfg = 'gray'
 "let g:limelight_conceal_ctermfg = 240
 Plug 'junegunn/goyo.vim'
-
-
-
+" enable autocompletion in vim
 " pynvim needs to be installed
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -62,7 +60,10 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 Plug 'deoplete-plugins/deoplete-jedi'
-
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" A bunch of useful language related snippets (ultisnips is the engine).
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -150,8 +151,10 @@ augroup encrypted
   autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
 
-set clipboard=unnamedplus "requires +clipboard 
-set mouse-=a  "disable automatic visual mode on mouse select
+set clipboard=unnamedplus "requires +clipboard
+"Enable using the mouse for moving cursor and visual select
+set mouse=a
+"set mouse-=a  "disable automatic visual mode on mouse select
 "save backup files ending with ~ to a different location
 set backupdir-=.
 set backupdir=~/tmp,/tmp
@@ -191,8 +194,47 @@ vnoremap <f5> :redirect(current.window.buffer) !python<CR>
 "
 "
 
-" This is new style
+ This is new style
 call deoplete#custom#var('omni', 'input_patterns', {
       \ 'tex': g:vimtex#re#deoplete
       \})
 "}
+"
+
+set number relativenumber
+set nohlsearch
+" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+	autocmd VimLeave *.tex !texclear %
+" Check file in shellcheck:
+	map <leader>s :!clear && shellcheck %<CR>
+" Automatically deletes all trailing whitespace and newlines at end of file on save.
+	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritepre * %s/\n\+\%$//e
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	map <leader>g :setlocal spell! spelllang=en_us<CR>
+" Goyo plugin makes text more readable when writing prose:
+	map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+
+"hi clear SpellBad
+hi SpellBad ctermbg=darkred ctermfg=white
+" Set style for gVim
+hi SpellBad gui=undercurl
+set tags=tags; "Enable ctags"
+set undofile "Save undos after file closes
+noremap S :%s//g<Left><Left>
+set spellfile=$HOME/Dropbox/vim-spell/en.utf-8.add
+
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+    " NerdTree {
+	    let NERDTreeShowBookmarks=1
+	    let NERDTreeMouseMode=2
+	    "let NERDTreeShowHidden=1
+    " }
+iabbrev *** •
+iabbrev +++ ▸
