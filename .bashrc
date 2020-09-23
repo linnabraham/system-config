@@ -17,7 +17,7 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000000
-#HISTFILESIZE=2000000
+HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -76,9 +76,7 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
+    alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -126,9 +124,6 @@ source $HOME/.config/todo_completion
 complete -F _todo t
 #alias todo-txt='/usr/bin/todo-txt -a -d /etc/todo-txt/config'
 
-#. /usr/share/undistract-me/long-running.bash
-#notify_when_long_running_commands_finish_install
-
 if [[ -n "`which luarocks 2>/dev/null`" ]]; then
     eval `luarocks path --bin`
 fi
@@ -136,24 +131,6 @@ fi
 export PATH="/home/linn/.local/bin/:$PATH"
 #export PATH="/home/linn/.virtualenvs/pytools/bin/:$PATH"
 export PATH="/home/linn/.local/bin/pandoc-2.10/bin/:$PATH"
-## added by Miniconda3 installer
-#export PATH="/home/linn/miniconda3/bin:$PATH"  # commented out by conda initialize
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$('/home/linn/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-    #eval "$__conda_setup"
-#else
-    #if [ -f "/home/linn/miniconda3/etc/profile.d/conda.sh" ]; then
-        #. "/home/linn/miniconda3/etc/profile.d/conda.sh"
-    #else
-        #export PATH="/home/linn/miniconda3/bin:$PATH"
-    #fi
-#fi
-#unset __conda_setup
-# <<< conda initialize <<<
-#conda deactivate
 # to fix problem with telegram-cli
 #export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgtk3-nocsd.so.0
 
@@ -181,14 +158,12 @@ if [[ -f ~/.config/pass.bash-completion ]]; then
     source ~/.config/pass.bash-completion
 fi
 
-# to show ascii art in terminal
-# python3 ascii.py
-# cat art
-
 #export PATH="/home/linn/.local/bin:$PATH"
 #export PATH="/home/linn/miniconda3/bin:$PATH"
+
 #set vim key-bindings in shell
 #set -o vi
+#bind ^L:clearscreen
 
 #TODO:find a better color scheme for other writable attribute coloring.
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
@@ -196,14 +171,8 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 export PATH="/usr/lib64/java/jre/bin/:$PATH"
 export TERM=xterm-256color
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
-#/home/guest/newscript &
-#if ! [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ]; then
-#  . /usr/share/undistract-me/long-running.bash
-#  notify_when_long_running_commands_finish_install
-#fi
-#. /usr/share/undistract-me/long-running.bash
-#notify_when_long_running_commands_finish_install
+#export PATH="/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
+export TEXMFHOME=/home/linn/.texmf/
 
 # git prompt
 source $HOME/.local/bin/git-prompt.sh
@@ -228,12 +197,13 @@ function shortwd() {
 
 export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h:$(shortwd)\[\033[0;32m\]$(__git_ps1)\[\033[0;32m\]\$ '
 
-#export FZF_DEFAULT_COMMAND='fd .  --hidden --follow --exclude .git '
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+export FZF_DEFAULT_COMMAND='fd .  --hidden --follow --exclude .git '
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+#export FZF_DEFAULT_COMMAND='find '
 #export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 xrdb -load /dev/null
-eval "$(thefuck --alias f)"
+#eval "$(thefuck --alias f)"
 export PROMPT_COMMAND='history -a'
 HISTCONTROL=ignoredups:erasedups
 
@@ -250,15 +220,15 @@ export TDIR="$HOME/Dropbox/todo"
 complete -cf sudo
 export MYBIB='/home/guest/mybib.bib'
 # Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+export GEM_HOME="$HOME/.local/share/gems"
+#export PATH="$HOME/.local/share/gems/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 #export PATH="/home/linn/.vim/plugged/vim-live-latex-preview/bin":$PATH
 
 export XDG_CONFIG_HOME="$HOME/.config"
-#[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ] && shortcuts >/dev/null 2>&1 &
-#[ ! -f "$XDG_CONFIG_HOME/shortcutrc" ] && shortcuts >/dev/null 2>&1 &
-
 [ -f $XDG_CONFIG_HOME/shortcutrc ] && source $XDG_CONFIG_HOME/shortcutrc
 export TERMINAL=/usr/local/bin/st
 #workon tf
 source /etc/profile.d/undistract-me.sh
+export RANGER_LOAD_DEFAULT_RC=FALSE
+stty -ixon
