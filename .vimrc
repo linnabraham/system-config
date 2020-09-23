@@ -42,6 +42,7 @@ let g:pandoc#modules#disabled = ['folding']
 ""let g:pandoc#biblio#bibs = ['/home/guest/stuff/myreseach.bib']
 let g:pandoc#spell#enabled = 0
 Plug 'lervag/vimtex'
+let g:tex_flavor = 'latex'
 Plug 'preservim/nerdcommenter'
 Plug 'bling/vim-airline'
 Plug 'chrisbra/csv.vim'
@@ -64,6 +65,13 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " A bunch of useful language related snippets (ultisnips is the engine).
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'vimwiki/vimwiki'
+"Plug 'xuhdev/vim-latex-live-preview'
+" If you don't have nodejs and yarn
+" use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
+" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -194,10 +202,10 @@ vnoremap <f5> :redirect(current.window.buffer) !python<CR>
 "
 "
 
- This is new style
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
+" This is new style
+"call deoplete#custom#var('omni', 'input_patterns', {
+      "\ 'tex': g:vimtex#re#deoplete
+      "\})
 "}
 "
 
@@ -222,7 +230,7 @@ set nohlsearch
 hi SpellBad ctermbg=darkred ctermfg=white
 " Set style for gVim
 hi SpellBad gui=undercurl
-set tags=tags; "Enable ctags"
+set tags=./tags;,tags;./.tags;,.tags; "set ctags to custom hidden file"
 set undofile "Save undos after file closes
 noremap S :%s//g<Left><Left>
 set spellfile=$HOME/Dropbox/vim-spell/en.utf-8.add
@@ -238,3 +246,5 @@ let NERDTreeDirArrows = 1
     " }
 iabbrev *** •
 iabbrev +++ ▸
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/','path_html':'~/vimwiki_html/',
+	    \ 'syntax': 'markdown', 'ext': '.md'}]
